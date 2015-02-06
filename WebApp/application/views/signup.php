@@ -1,5 +1,5 @@
-<div class="container sign_pick" >
-	<div class="sign_form_div">
+
+	<div class="signup_form_div  col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-12" >
 			<form method="post" action="<?php echo base_url('signup');?>">
 				<div class="form-group">
 					
@@ -17,14 +17,11 @@
 					
 					Password<input type="password" name="password" id="password" required="required" class="form-control" />
 				</div>
+				
 				<div class="form-group">
-					
-					Confirm Password<input type="password" name="c_password" id="c_password" required="required" class="form-control" />
+					<input type="submit" value="Sign Up" name="SignUp" class="app_btn" disabled="disabled"/>
 				</div>
-				<div class="form-group">
-					<input type="submit" value="Sign Up"  class="app_btn" />
-				</div>
-	
+				
 			</form>
 	</div>
-</div>
+

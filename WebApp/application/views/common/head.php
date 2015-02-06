@@ -17,8 +17,15 @@
 	<?php if($CSS == "SIGNUP") { ?>
 	<title>Apparel | SignUp</title>
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/apparel.css">
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/signup.css">
 	
 	<?php }?>
+	<?php if($CSS == "LOGIN") { ?>
+	<title>Apparel | Login</title>
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/apparel.css">
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/signin.css">
 	
+	<?php }?>
 </head>
