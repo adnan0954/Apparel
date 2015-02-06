@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-//define("FBKEY", "1234567890123456");
-//define("FBIV",  "1234567890123456");
+define("FBKEY", "1234567890123456");
+define("FBIV",  "1234567890123456");
 
 //VIEWS
 function Head($param)
@@ -30,17 +30,13 @@ function Footer()
 	$CI = & get_instance();
 	$CI->load->view('common/footer');
 }
-
-
-
 //ENDVIEWS
 
 
 
-//USER
+//USER INFORMATION
 function IsLoggedIn()
 {
-	//return TRUE;
 	$CI = & get_instance();
 	if($CI->session->userdata('loggedin')){
 		return TRUE;
@@ -99,6 +95,12 @@ function Followers()
 {
 	$CI = & get_instance();
 	return $CI->session->userdata('followers');
+}
+
+function ProfilePicture()
+{
+	$CI = & get_instance();
+	return $CI->session->userdata('profile');
 }
 
 function GetHash()
@@ -193,7 +195,6 @@ function LogAttempt()
 	$CI = & get_instance();
 	$data = array(
 		'email' => strtolower($CI->input->post('Email')),
-		'source' => 'WEB',
 		'ip' => $_SERVER['REMOTE_ADDR'],
 		'datecreated' => date('Y-m-d H:i:s'),
 		'useragent' => $_SERVER['HTTP_USER_AGENT']

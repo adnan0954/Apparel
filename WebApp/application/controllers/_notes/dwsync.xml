@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="index.html" server="myfirebook.com/public_html/apparel.com/" local="130676397034102736" remote="130675987200000000" Dst="0" />
-<file name="signup.php" server="myfirebook.com/public_html/apparel.com/" local="130676802812165355" remote="130676707200000000" Dst="0" />
-<file name="main.php" server="myfirebook.com/public_html/apparel.com/" local="130676935484707421" remote="130676719200000000" Dst="0" />
-<file name="login.php" server="myfirebook.com/public_html/apparel.com/" local="130676947405128584" remote="130676731200000000" Dst="0" />
+<file name="index.html" server="myfirebook.com/public_html/apparel.com/" local="130676397034102736" remote="130676824800000000" Dst="0" />
+<file name="signup.php" server="myfirebook.com/public_html/apparel.com/" local="130677169091928800" remote="130676952600000000" Dst="0" />
+<file name="main.php" server="myfirebook.com/public_html/apparel.com/" local="130676935484707421" remote="130676824800000000" Dst="0" />
+<file name="login.php" server="myfirebook.com/public_html/apparel.com/" local="130677197536792872" remote="130676981400000000" Dst="0" />
+<file name="welcome.php" server="myfirebook.com/public_html/apparel.com/" local="130677116009585071" remote="130676899800000000" Dst="0" />
+<file name="logout.php" server="myfirebook.com/public_html/apparel.com/" local="130677146900427786" remote="130676931000000000" Dst="0" />
+<file name="profile.php" server="myfirebook.com/public_html/apparel.com/" local="130677203097838377" remote="130676986800000000" Dst="0" />
 </dwsync>

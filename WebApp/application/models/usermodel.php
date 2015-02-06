@@ -24,6 +24,7 @@ class UserModel extends CI_Model
 					'address' => $rows['address'],
 					'followers' => $rows['followers'],
 					'following' => $rows['following'],
+					'profile' => $rows['profile']
 					));
 			return TRUE;
 		}
@@ -73,7 +74,7 @@ class UserModel extends CI_Model
 		$data = array(
 			'email' => strtolower($this->input->post('Email')),
 			'handle' => strtolower($this->input->post('Username')),
-			'name' => $this->input->post('Name'),
+			'name' => $this->input->post('Fullname'),
 			'password' => ENCRYPTME($this->input->post('Password')),
 			'datecreated' => date('Y-m-d H:i:s'),
 			'following' => 0,
@@ -82,8 +83,21 @@ class UserModel extends CI_Model
 
 		if($this->db->insert('user', $data))
 		{
-			//$this->load->helper('mail');
-			//SendVerificationMail();
+			$this->session->set_userdata(
+				array(
+					'email' => strtolower($this->input->post('Email')),
+					'name' => $this->input->post('Fullname'),
+					'handle' => $this->input->post('Username'),
+					'loggedin' => TRUE,
+					'bio' => "",
+					'number' => "",
+					'tags' => array(),
+					'address' => "",
+					'followers' => 0,
+					'following' => 0,
+					'profile' => $rows['profile']
+					));
+
 			return TRUE;
 		}
 		else FALSE;
@@ -166,6 +180,7 @@ class UserModel extends CI_Model
 					'address' => '',
 					'followers' => '',
 					'following' => '',
+					'profile' => ''
 				));
 
 		$this->session->sess_destroy();

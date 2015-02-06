@@ -1,6 +1,7 @@
 <?php define('APPAREL', TRUE);
 require_once('nectar.php');
 
+//RECIEVE POST VALUES
 $_handle = strtolower($_POST['handle']);
 $handle = $_POST['handle'];
 $name = $_POST['name'];

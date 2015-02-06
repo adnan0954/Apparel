@@ -6,19 +6,18 @@ $password = ENCRYPTME($_POST['password']);
 
 try 
 {
-    $queryCheckHandle = $dbcon->prepare("SELECT * FROM `user` WHERE handle = ? LIMIT 1");
-    $queryCheckHandle->execute(array($handle));
+    $query = $dbcon->prepare("SELECT * FROM `user` WHERE handle = ? LIMIT 1");
+    $query->execute(array($handle));
     
-    if ($queryCheckHandle->rowCount() == 1) 
+    if ($query->rowCount() == 1) 
 	{
-        $query = $dbcon->prepare("INSERT INTO `user` (email, handle, name, password, datecreated) VALUES (?, ?, ?, ?, ?)");
-        $query->execute(array($email, $handle, $name, $password, date('Y-m-d H:i:s')));
-		
         LogAccess("Sign In");
+        $row = $query->fetch(PDO::FETCH_ASSOC);
 		echo json_encode(array(
 			"response" => "1",
 			"token" => CreateToken(),
-			"message" => ""
+			"message" => "",
+            "info" => $row
 			 ));
     } 
     else

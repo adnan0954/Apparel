@@ -1,13 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class welcome extends CI_Controller {
+class profile extends CI_Controller {
 	
 	public function index()
 	{
-		Head('WELCOME');
+		Head('PROFILE');
 		GetHeader();
-		$this->load->view('welcome');
+		$this->load->view('profile');
 		Footer();
-		Foot('WELCOME');
+		Foot('PROFILE');
 	}
 }

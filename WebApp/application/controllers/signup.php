@@ -10,26 +10,40 @@ class Signup extends CI_Controller {
 
 	public function index()
 	{
-		$this->validation();
 		$error = "";
+		$this->validation();
+
+		if($this->input->post('ck_username'))
+		{
+			if ($this->UserModel->CheckHandleExist(Clean($this->input->post('username'))))
+			{
+				echo "0";
+			}
+			else echo "1";
+			exit();
+		}
+
+		if($this->input->post('ck_email'))
+		{
+			if ($this->UserModel->CheckUserExist(Clean($this->input->post('email'))))
+			{
+				echo "0";
+			}
+			else echo "1";
+			exit();
+		}		
 		
 		if($this->input->post('Register'))
 		{
-			
 			if ($this->form_validation->run() == FALSE)
-			{
-			}
+			{}
 			else
 			{	
 				if($this->UserModel->CreateUser())
 				{
-					if($this->UserModel->Login() == TRUE)
-				{
 					LogAccess();
-					redirect('Profile');
+					redirect('welcome');
 					return;
-				}
-					
 				}
 				else
 				{
@@ -38,10 +52,10 @@ class Signup extends CI_Controller {
 			}
 		}
 		
-		
+		$data['Error'] = $error;
 		Head('SIGNUP');
 		GetHeader();
-		$this->load->view('signup');
+		$this->load->view('signup', $data);
 		Footer();
 		Foot('SIGNUP');
 	}
@@ -52,8 +66,8 @@ class Signup extends CI_Controller {
 		$this->load->library('form_validation');
 		$config = array(
 			array(
-				'field'   => 'Name',
-				'label'   => 'Name',
+				'field'   => 'Fullname',
+				'label'   => 'Full Name',
 				'rules'   => 'trim|required|min_length[2]|xss_clean|htmlspecialchars'
 				),
 			array(
@@ -101,6 +115,7 @@ class Signup extends CI_Controller {
 			return TRUE;
 		}
 	}
-}
 
+
+}
 ?>

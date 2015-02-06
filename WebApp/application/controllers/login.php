@@ -13,6 +13,7 @@ class login extends CI_Controller
 		$this->load->model('UserModel');
 		$error = "";
 		Head("LOGIN");
+		GetHeader();
 		$this->validation();
 
 		if($this->input->post('SignIn'))
@@ -45,6 +46,7 @@ class login extends CI_Controller
 
 		$data['Error'] = $error;
 		$this->load->view('signin', $data);
+		Footer();
 		Foot("LOGIN");
 	}
 	
