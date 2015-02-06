@@ -1,8 +1,8 @@
 <?php define('APPAREL', TRUE);
 require_once('nectar.php');
 
-$handle = strtolower($postvalues['handle']);
-$password = ENCRYPTME($postvalues['password']);
+$handle = strtolower($_POST['handle']);
+$password = ENCRYPTME($_POST['password']);
 
 try 
 {

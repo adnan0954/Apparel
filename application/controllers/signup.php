@@ -8,8 +8,6 @@ class Signup extends CI_Controller {
 		$this->load->model('UserModel');
 	}
 
-
-
 	public function index()
 	{
 		$this->validation();
@@ -28,7 +26,7 @@ class Signup extends CI_Controller {
 					if($this->UserModel->Login() == TRUE)
 				{
 					LogAccess();
-					redirect('dashboard');
+					redirect('Profile');
 					return;
 				}
 					
@@ -47,20 +45,21 @@ class Signup extends CI_Controller {
 		Footer();
 		Foot('SIGNUP');
 	}
+
 	private function validation() 
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$config = array(
 			array(
-				'field'   => 'FirstName',
-				'label'   => 'First name',
-				'rules'   => 'alpha|trim|required|min_length[2]|xss_clean|htmlspecialchars'
+				'field'   => 'Name',
+				'label'   => 'Name',
+				'rules'   => 'trim|required|min_length[2]|xss_clean|htmlspecialchars'
 				),
 			array(
-				'field'   => 'LastName',
-				'label'   => 'Last name',
-				'rules'   => 'trim|required|min_length[2]|xss_clean|htmlspecialchars'
+				'field'   => 'Username',
+				'label'   => 'Username',
+				'rules'   => 'trim|required|min_length[2]|xss_clean|htmlspecialchars|callback_UsernameCheck'
 				),
 			array(
 				'field'   => 'Email',
@@ -75,4 +74,33 @@ class Signup extends CI_Controller {
 			);
 		$this->form_validation->set_rules($config);
 	}
+ 
+
+	public function EmailCheck($email)
+	{
+		if ($this->UserModel->CheckUserExist($email))
+		{
+			$this->form_validation->set_message('callback_EmailCheck', 'Email already exists');
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
+	}
+
+	public function UsernameCheck($handle)
+	{
+		if ($this->UserModel->CheckHandleExist($handle))
+		{
+			$this->form_validation->set_message('callback_UsernameCheck', 'Username already exists');
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
+	}
 }
+
+?>

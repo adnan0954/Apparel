@@ -18,12 +18,6 @@ function GetHeader()
 	$CI->load->view('common/header', $data);
 }
 
-function GetBlogHeader()
-{
-	$CI = & get_instance();
-	$CI->load->view('common/headerblog');
-}
-
 function Foot($param)
 {
 	$data['JS'] = $param;
@@ -59,28 +53,52 @@ function Email()
 	return $CI->session->userdata('email');
 }
 
-function FirstName()
+function Name()
 {
 	$CI = & get_instance();
-	return $CI->session->userdata('firstname');
+	return $CI->session->userdata('name');
 }
 
-function LastName()
+function Username()
 {
 	$CI = & get_instance();
-	return $CI->session->userdata('lastname');
+	return $CI->session->userdata('handle');
 }
 
-function IsVerified()
+function Number()
 {
 	$CI = & get_instance();
-	return $CI->session->userdata('verified');
+	return $CI->session->userdata('number');
 }
 
-function IsPremium()
+function Bio()
 {
 	$CI = & get_instance();
-	return $CI->session->userdata('ispremium');
+	return $CI->session->userdata('bio');
+}
+
+function Tags()
+{
+	$CI = & get_instance();
+	return $CI->session->userdata('tags');
+}
+
+function Address()
+{
+	$CI = & get_instance();
+	return $CI->session->userdata('address');
+}
+
+function Following()
+{
+	$CI = & get_instance();
+	return $CI->session->userdata('following');
+}
+
+function Followers()
+{
+	$CI = & get_instance();
+	return $CI->session->userdata('followers');
 }
 
 function GetHash()
@@ -146,7 +164,6 @@ function LogAccess($status = '0x801')
 	$CI = & get_instance();
 	$data = array(
 		'email' => Email(),
-		'source' => 'WEB',
 		'status' => $status,
 		'ip' => $_SERVER['REMOTE_ADDR'],
 		'datecreated' => date('Y-m-d H:i:s'),
@@ -161,7 +178,6 @@ function LogActivity($status, $message = "")
 	$CI = & get_instance();
 	$data = array(
 		'email' => Email(),
-		'source' => 'WEB',
 		'status' => $status,
 		'ip' => $_SERVER['REMOTE_ADDR'],
 		'datecreated' => date('Y-m-d H:i:s'),
@@ -178,7 +194,6 @@ function LogAttempt()
 	$data = array(
 		'email' => strtolower($CI->input->post('Email')),
 		'source' => 'WEB',
-		'status' => '0x909',
 		'ip' => $_SERVER['REMOTE_ADDR'],
 		'datecreated' => date('Y-m-d H:i:s'),
 		'useragent' => $_SERVER['HTTP_USER_AGENT']

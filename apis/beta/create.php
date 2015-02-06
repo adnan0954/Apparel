@@ -1,11 +1,11 @@
 <?php define('APPAREL', TRUE);
 require_once('nectar.php');
 
-$_handle = strtolower($postvalues['handle']);
-$handle = $postvalues['handle'];
-$name = $postvalues['name'];
-$password = ENCRYPTME($postvalues['password']);
-$email = strtolower($postvalues['email']);
+$_handle = strtolower($_POST['handle']);
+$handle = $_POST['handle'];
+$name = $_POST['name'];
+$password = ENCRYPTME($_POST['password']);
+$email = strtolower($_POST['email']);
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) die('a');
 if (!preg_match('/^[A-Za-z0-9_]{1,15}$/', $handle)) die ('b');

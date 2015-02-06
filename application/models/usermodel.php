@@ -4,8 +4,9 @@ class UserModel extends CI_Model
 {
 	public function Login()
 	{
-		$this->db->where("email", strtolower($this->input->post('Email')));
+		$this->db->where("handle", strtolower($this->input->post('Username')));
 		$this->db->where("password", ENCRYPTME($this->input->post('Password')));
+		
 		$query = $this->db->get("user");
 
 		if($query->num_rows() == 1)
@@ -14,11 +15,15 @@ class UserModel extends CI_Model
 			$this->session->set_userdata(
 				array(
 					'email' => $rows['email'],
-					'firstname' =>$rows['firstname'],
-					'lastname' => $rows['lastname'],
+					'name' => $rows['name'],
+					'handle' => $rows['handle'],
 					'loggedin' => TRUE,
-					'verified' => $rows['status'],
-					'ispremium' => $rows['ispremium']
+					'bio' => $rows['bio'],
+					'number' => $rows['number'],
+					'tags' => explode('/', $rows['tags']),
+					'address' => $rows['address'],
+					'followers' => $rows['followers'],
+					'following' => $rows['following'],
 					));
 			return TRUE;
 		}
@@ -36,10 +41,7 @@ class UserModel extends CI_Model
 			$this->session->set_userdata(
 				array(
 					'email' => $rows['email'],
-					'firstname' =>$rows['firstname'],
-					'lastname' => $rows['lastname'],
-					'verified' => $rows['status'],
-					'ispremium' => $rows['ispremium']
+					'name' =>$rows['name'],
 					));
 		}
 	}
@@ -55,26 +57,41 @@ class UserModel extends CI_Model
 		else return FALSE;
 	}
 
+	public function CheckHandleExist($handle)
+	{
+		$this->db->where("handle", strtolower($handle));
+		$query = $this->db->get("user");
+		if($query->num_rows() == 1)
+		{
+			return TRUE;
+		}
+		else return FALSE;
+	}
+
 	public function CreateUser()
 	{
 		$data = array(
 			'email' => strtolower($this->input->post('Email')),
-			'firstname' => $this->input->post('FirstName'),
-			'lastname' => $this->input->post('LastName'),
+			'handle' => strtolower($this->input->post('Username')),
+			'name' => $this->input->post('Name'),
 			'password' => ENCRYPTME($this->input->post('Password')),
 			'datecreated' => date('Y-m-d H:i:s'),
-			'slots' => '0',
-			'ispremium' => '0',
-			'status' => '0'
+			'following' => 0,
+			'followers' => 0,
 			);
 
 		if($this->db->insert('user', $data))
 		{
-			$this->load->helper('mail');
-			SendVerificationMail();
+			//$this->load->helper('mail');
+			//SendVerificationMail();
 			return TRUE;
 		}
 		else FALSE;
+	}
+
+	public function UpdateUser()
+	{
+
 	}
 
 
@@ -139,12 +156,16 @@ class UserModel extends CI_Model
 	{
 		$this->session->unset_userdata(
 			array(
-				'email' => "",
-				'firstname' => "",
-				'lastname' => "",
-				'loggedin' => FALSE,
-				'verified' => "",
-				'ispremium' => ""
+					'email' => '',
+					'name' => '',
+					'handle' => '',
+					'loggedin' => FALSE,
+					'bio' => '',
+					'number' => '',
+					'tags' => array(),
+					'address' => '',
+					'followers' => '',
+					'following' => '',
 				));
 
 		$this->session->sess_destroy();

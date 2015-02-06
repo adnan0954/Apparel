@@ -9,8 +9,13 @@ $database = DATABASE;
 $username = "timay_ADMIN";
 $password = ";#lX&I468IZD";
 
+
 $dbcon = new PDO("mysql:host=localhost;dbname=$database;charset=utf8mb4", $username, $password, array(PDO::ATTR_EMULATE_PREPARES => false,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
+foreach($_POST as $key => &$value)
+{
+	$value = htmlspecialchars(stripslashes(trim($value)));
+}
 
 function LogError($message, $status = "0x903")
 {
