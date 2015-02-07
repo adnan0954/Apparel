@@ -40,16 +40,14 @@ function LogError($message, $status = "0x903")
 function CreateToken()
 {
 	global $dbcon;
-	global $email;
-	global $deviceid;
-	global $source;
+	global $handle;
 	
 	try
 	{
-		$hash = strtoupper(substr(hash('sha256', microtime()), 15, -10).substr(hash('ripemd256', $email.$deviceid), 15, -10));
+		$hash = strtoupper(substr(hash('sha256', microtime()), 15, -10).substr(hash('ripemd256', $handle), 15, -10));
 		
-		$query = $dbcon->prepare("INSERT INTO log_token (email, token, useragent, datecreated, ip) VALUES (?, ?, ?, ?, ?)  ON DUPLICATE KEY UPDATE token = ?, useragent = ?, datecreated = ? WHERE email = ?");
-		$query->execute(array($email, $hash, $_SERVER['HTTP_USER_AGENT'], date('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR'], $hash, $_SERVER['HTTP_USER_AGENT'], date('Y-m-d H:i:s'), $email));
+		$query = $dbcon->prepare("INSERT INTO log_token (handle, token, useragent, datecreated, ip) VALUES (?, ?, ?, ?, ?)  ON DUPLICATE KEY UPDATE token = ?, useragent = ?, datecreated = ?");
+		$query->execute(array($handle, $hash, $_SERVER['HTTP_USER_AGENT'], date('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR'], $hash, $_SERVER['HTTP_USER_AGENT'], date('Y-m-d H:i:s')));
 
 		return $hash;
 	}
@@ -64,10 +62,10 @@ function CreateToken()
 function LogAccess($status)
 {
 	global $dbcon;
-	global $email;
+	global $handle;
 
-	$log = $dbcon->prepare("INSERT INTO log_access(useragent, email, status, ip, datecreated, serverversion) VALUES (?, ?, ?, ?, ?, ?)");
-	$log->execute(array($_SERVER['HTTP_USER_AGENT'], $email, $status, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'), VERSION));
+	$log = $dbcon->prepare("INSERT INTO log_access(useragent, handle, status, ip, datecreated, serverversion) VALUES (?, ?, ?, ?, ?, ?)");
+	$log->execute(array($_SERVER['HTTP_USER_AGENT'], $handle, $status, $_SERVER['REMOTE_ADDR'], date('Y-m-d H:i:s'), VERSION));
 }
 
 

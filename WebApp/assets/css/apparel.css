@@ -48,6 +48,7 @@ body {
     line-height: 1.5;
     width:100%;
 	height:100%;
+	background-color:#aaa;
 }
 #apparel_header{height:70px;color:white;background-color:#F88F2D;font-size:20px;line-height:70px;}
 #apparel_header a span{margin:0px 50px 0px 0px;color:white;}
@@ -55,9 +56,23 @@ body {
 #apparel_logo img{width:70px;margin-left:20px;}
 #sign_options{display:inline-block;}
 .sign_pick{height:500px;margin-top:30px;}
-.sign_foot{height:70px;position:absolute;bottom:0px;width:100%;background-color:#666;}
+.foot{height:70px;position:fixed;bottom:0px;width:100%;background-color:#666;text-align:center;color:white;line-height:70px;}
+.foot a span{margin:0px 20px;color:white;}
 .signup_form_div{margin-top:5%;}
-.signin_form_div{margin-top:15%;}
+.signin_form_div{margin-top:10%;}
 .form-group input{margin:0px;} 
 .form-group input[type=submit]{width:150px;margin-left:30%;color:#F88F2D}
-.app_btn{padding:5px 10px;border:1px solid #F88F2D;background-color:white;border-radius:2px;}
+.app_btn{padding:5px 10px;border:1px solid #F88F2D;background-color:white;border-radius:2px;color:#F88F2D;}
+#display_email{margin-right:20px;}
+ .error{
+        background: #fff url("/assets/images/invalid.png") 98% center no-repeat;
+      }
+      .success{
+        background: #fff url("/assets/images/valid.png") 98% center no-repeat;
+      }
+      .checking_input_field{
+        background: #fff url("/assets/images/load.gif") 98% center no-repeat;
+		background-size: 20px;
+      }
+	  
+	  

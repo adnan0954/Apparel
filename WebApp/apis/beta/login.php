@@ -17,7 +17,17 @@ try
 			"response" => "1",
 			"token" => CreateToken(),
 			"message" => "",
-            "info" => $row
+            "info" => array('name' => $row['name'],
+                            'tags' => explode('/', $row['tags']),
+                            'handle' => $row['handle'],
+                            'email' => $row['email'],
+                            'number' => $row['number'],
+                            'address' => $row['address'],
+                            'following' => $row['following'],
+                            'followers' => $row['followers'],
+                            'rating' => $row['rating'],
+                            'picture' => $row['picture'],
+                            )
 			 ));
     } 
     else
